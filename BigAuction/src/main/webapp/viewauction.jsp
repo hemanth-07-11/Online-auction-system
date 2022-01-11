@@ -7,6 +7,80 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View Auction</title>
+<style>
+body{
+          background-color: #328f8a;
+          background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+height:710px;
+margin-left:4%;
+}
+#tbl{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+#tb1{
+width :96%;
+text-align:center;
+
+border:2px solid white;
+padding:0;
+border-collapse:collapse;
+height:105px;
+}
+
+#tb2{
+width :36%;
+text-align:center;
+
+border:2px solid white;
+padding:0;
+border-collapse:collapse;
+height:110px;
+}
+#hd1{
+background-color:white;
+font-weight:bold;
+}
+#td1{
+color :white;
+font-size:16px;
+}
+
+#bid{
+background-color:white;
+text-decoration:none;
+color:black;
+font-size:bold 16px;
+padding:8px 12px 8px 12px;
+margin-left:42%;
+border-radius:25px;
+}
+h3{
+color:white;
+font-weight:bold;
+}
+
+#backbutton{
+font: 15px;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 10px 10px 10px 10px;
+
+  width:200px;
+  height:50px;
+  border-radius:15px;
+
+}
+
+#backbutton:hover{
+color: #328f8a;
+
+}
+
+</style>
 </head>
 <body>
 	
@@ -48,41 +122,44 @@ try {
 	    ResultSet result;
 	    result = stmt.executeQuery("SELECT * FROM " + v + " v INNER JOIN seller s ON v.itemID = s.itemID INNER JOIN auction a ON v.itemID = a.auctionID WHERE v.itemID = " + itemID);
 	    %>
-	    <table>
-		<tr>   
-			<td>Name~~~~~</td> 
-			<td>Type~~~~~</td>
+	    <h3>Product Details !</h3>
+	    <br>
+
+	    <table id="tb1">
+		<tr id="hd1">
+			<td >Name</td>
+			<td>Type</td>
 			<td>
 						
 							<% if(v.equals("mobile"))
-									out.write("Topspeed~~~~~");
+									out.write("Topspeed");
 								else if(v.equals("laptop"))
-									out.write("Wingspan~~~~~");
+									out.write("Wingspan");
 								else 
-									out.write("Mileage~~~~~");%>
+									out.write("Mileage");%>
 						
 			</td>
 			<td>
 						
 							<% if(v.equals("mobile"))
-									out.write("Width~~~~~");
+									out.write("Width");
 								else if(v.equals("laptop"))
-									out.write("Capacity~~~~~");
+									out.write("Capacity");
 								else 
-									out.write("ram~~~~~");%>
+									out.write("ram");%>
 						
 			</td>
-			<td>ItemID~~~~~</td> 
-			<td>Seller~~~~~~~~~~~~~~~</td> 
-			<td>View Seller~~~~~</td>
-			<td>Current bid~~~~~</td>
-			<td>End date~~~~~</td>
+			<td>ItemID</td>
+			<td>Seller</td>
+			<td>View Seller</td>
+			<td>Current bid</td>
+			<td>End date</td>
 		</tr>
 			<%
 			//parse out the results
 			while (result.next()) { 
 				%>
-				<tr>    
+				<tr id="td1">
 					<td>
 						
 							<%= result.getString("name") %>
@@ -140,7 +217,7 @@ try {
 					<td><%= result.getString("itemID")%></td>
 					<td><%= result.getString("email") %></td>
 					<td>
-							<a href="viewUser.jsp?email=<%=result.getString("email")%>">View this user</a>
+							<a id="tbl" href="viewUser.jsp?email=<%=result.getString("email")%>">View this user</a>
 					</td>
 						<td>
 							<% 
@@ -172,22 +249,23 @@ try {
 
 		%>
 		<br>
-		<a href="biddingpage.jsp?itemID=<%=itemID%>">BID ON THIS AUCTION!</a>
+		<br>
+		<a id="bid" href="biddingpage.jsp?itemID=<%=itemID%>">BID ON THIS AUCTION!</a>
 		<br>
 		<br>
-		Bid History
+		<h3>Bid History : </h3>
 		<br>
-		<table>
-			<tr>
-				<td>Bidder~~~~~~~~~~~~~~~~</td>
-				<td>Amount~~~~~</td>
-				<td>View Bidder~~~~~</td>
+		<table id="tb2">
+			<tr id="hd1" >
+				<td>Bidder</td>
+				<td>Amount</td>
+				<td>View Bidder</td>
 			</tr>
 			<%
 			//parse out the results
 			while (result5.next()) { 
 				%>
-				<tr>    
+				<tr id="td1">
 					<td>
 							<%= result5.getString("email") %>
 					</td>
@@ -195,7 +273,7 @@ try {
 							<%= result5.getString("amount") %>
 					</td>
 					<td>
-							<a href="viewUser.jsp?email=<%=result5.getString("email")%>">View this user</a>
+							<a id="tbl" href="viewUser.jsp?email=<%=result5.getString("email")%>">View this user</a>
 					</td>
 					</tr>
 				
@@ -205,7 +283,7 @@ try {
 				    %>
 		</table>
 		<br>
-		Similar auctions
+		<h3>Similar auctions :</h3>
 		
 		
 		
@@ -218,42 +296,42 @@ try {
 		
 		
 		%>
-		<table>
-		<tr>   
-			<td>Name~~~~~</td> 
-			<td>Type~~~~~</td>
+		<table id="tb1">
+		<tr id="hd1">
+			<td>Name</td>
+			<td>Type</td>
 			<td>
 						
 							<% if(v.equals("mobile"))
-									out.write("Topspeed~~~~~");
+									out.write("Topspeed");
 								else if(v.equals("laptop"))
-									out.write("Wingspan~~~~~");
+									out.write("Wingspan");
 								else 
-									out.write("Mileage~~~~~");%>
+									out.write("Mileage");%>
 						
 			</td>
 			<td>
 						
 							<% if(v.equals("mobile"))
-									out.write("Width~~~~~");
+									out.write("Width");
 								else if(v.equals("laptop"))
-									out.write("Capacity~~~~~");
+									out.write("Capacity");
 								else 
-									out.write("ram~~~~~");%>
+									out.write("ram");%>
 						
 			</td>
-			<td>ItemID~~~~~</td> 
-			<td>Seller~~~~~~~~~~~~~~~</td> 
-			<td>View Seller~~~~~</td>
-			<td>Current bid~~~~~</td>
-			<td>End date~~~~~</td>
+			<td>ItemID</td>
+			<td>Seller</td>
+			<td>View Seller</td>
+			<td>Current bid</td>
+			<td>End date</td>
 			<td>View Auction</td>
 		</tr>
 			<%
 			//parse out the results
 			while (result6.next()) {
 				String itemID2 = result6.getString("itemID");%>
-				<tr>    
+				<tr id="td1">
 					<td>
 						
 							<%= result6.getString("name") %>
@@ -289,7 +367,7 @@ try {
 					<td><%= result6.getString("itemID")%></td>
 					<td><%= result6.getString("email") %></td>
 					<td>
-							<a href="viewUser.jsp?email=<%=result6.getString("email")%>">View this user</a>
+							<a id="tblh" ref="viewUser.jsp?email=<%=result6.getString("email")%>">View this user</a>
 					</td>
 						<td>
 							<% 
@@ -318,9 +396,8 @@ try {
 		
 	
 		<br><br>
-		<a href="browsefilter.jsp?vehicleCategory=<%=v%>">Back to looking at <%=v %>s</a>
-		<br><br>
-		<a href="browse.jsp?sortBy=itemID">Back to all auctions</a>
+		<a id="backbutton" href="browsefilter.jsp?vehicleCategory=<%=v%>">Back to looking at <%=v %>s</a>&nbsp;
+		<a id="backbutton" href="browse.jsp?sortBy=itemID">Back to all auctions</a>
 	    <% 
 	    db.closeConnection(con);
 	    con.close();

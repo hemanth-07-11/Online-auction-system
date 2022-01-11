@@ -7,6 +7,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Browse!</title>
+<style>
+body{
+          background-color: #328f8a;
+          background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+height:710px;
+margin-left:4%;
+}
+h3{
+color:white;
+font-weight:bold;
+}
+#tb{
+border:2px solid white;
+width:55%;
+text-align:center;
+height: 200px;
+border-collapse:collapse;
+}
+#hd1{
+background-color:white;
+font-weight:bold;
+}
+
+#td1{
+color :white;
+font-size:16px;
+}
+
+#tbl{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+#backbutton{
+font: 15px;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 10px 10px 10px 10px;
+
+  width:200px;
+  height:50px;
+  border-radius:15px;
+
+}
+
+#backbutton:hover{
+color: #328f8a;
+
+}
+</style>
 </head>
 <body>
 	
@@ -27,21 +78,20 @@ try {
 		System.out.println(query1);
 	    result = stmt.executeQuery(query1);
 	    %>
-	    <p>Behold, the history of the user <%=email %></p>
-	    <br>
-	    <p>Auctions in as seller:</p>
-	    <table>
-		<tr>
-			<td>Name~~~~~</td>
-			<td>ItemID~~~~~</td>
-			<td>Price~~~~~</td>
-			<td>End date~~~~~</td>
+	    <h3>Behold, the history of the user <%=email %></h3>
+	    <h3>Auctions in as seller:</h3>
+	    <table id="tb">
+		<tr id="hd1">
+			<td>Name</td>
+			<td>ItemID</td>
+			<td>Price</td>
+			<td>End date</td>
 			<td>View Auction</td>   
 
 		</tr>
 			<%while (result.next()) { 
 				String itemID = result.getString("itemID");%>
-				<tr>    
+				<tr id="td1">
 					<td><%= result.getString("name") %></td>
 					<td><%= result.getString("itemID") %></td>
 					<td>
@@ -58,7 +108,7 @@ try {
 						</td>
 						<td><%= result.getString("endDate") %></td>
 						<td>
-							<a href="viewauction.jsp?itemID=<%=itemID%>">View this auction</a>
+							<a id="tbl" href="viewauction.jsp?itemID=<%=itemID%>">View this auction</a>
 						</td>
 				</tr>
 				
@@ -77,20 +127,20 @@ try {
 		System.out.println(query3);
 	    result3 = stmt.executeQuery(query3);
 	    %>
-	    <br>
-	    <p>Auctions in as buyer:</p>
-	    <table>
-		<tr>
-			<td>Name~~~~~</td>
-			<td>ItemID~~~~~</td>
-			<td>Price~~~~~</td>
-			<td>End date~~~~~</td>
+
+	    <h3>Auctions in as buyer:</h3>
+	    <table id="tb">
+		<tr id="hd1">
+			<td>Name</td>
+			<td>ItemID</td>
+			<td>Price</td>
+			<td>End date</td>
 			<td>View Auction</td>   
 
 		</tr>
 			<%while (result3.next()) { 
 				String itemID = result3.getString("itemID");%>
-				<tr>    
+				<tr id="td1">
 					<td><%= result3.getString("name") %></td>
 					<td><%= result3.getString("itemID") %></td>
 					<td>
@@ -106,7 +156,7 @@ try {
 						</td>
 						<td><%= result3.getString("endDate") %></td>
 						<td>
-							<a href="viewauction.jsp?itemID=<%=itemID%>">View this auction</a>
+							<a id="tbl" href="viewauction.jsp?itemID=<%=itemID%>">View this auction</a>
 						</td>
 				</tr>
 				
@@ -117,8 +167,8 @@ try {
 			
 			%>
 		</table>
-
-		<a href="browse.jsp?sortBy=itemID">Back to all auctions</a>
+<br><br>
+		<a id="backbutton" href="browse.jsp?sortBy=itemID">Back to all auctions</a>
 	    <% 
 	    db.closeConnection(con);
 	    con.close();

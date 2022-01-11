@@ -7,6 +7,78 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Browse!</title>
+<style>
+body{
+          background-color: #328f8a;
+        margin-left:3%;
+            background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+height:710px;
+}
+h3{
+color:white;
+font-weight:bold;
+}
+
+#backbutton{
+font: 15px;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 10px 10px 10px 10px;
+
+  width:200px;
+  height:50px;
+  border-radius:15px;
+
+}
+
+#backbutton:hover{
+color: #328f8a;
+
+}
+#bt1{
+
+border:none;
+font:17px;
+padding:8px 6px 6px 8px;
+border-radius:8px;
+}
+#st{
+border-spacing:0.5rem;
+}
+#hd1{
+background-color:white;
+font-weight:bold;
+}
+#tbl{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+#tb{
+width :96%;
+text-align:center;
+
+border:2px solid white;
+padding:0;
+border-collapse:collapse;
+height:135px;
+}
+#td1{
+color :white;
+font-size:16px;
+}
+#lb1{
+color:white;
+padding:8px 4px 4px 8px;
+border-radius:8px;
+border:none;
+}
+#l1{
+color:white;
+}
+</style>
 </head>
 <body>
 	
@@ -34,82 +106,82 @@ try {
 		System.out.println(query);
 	    result = stmt.executeQuery(query);
 	    %>
-	    <p>Behold, the fine <%= v %>s on sale:</p>
-	    <table>
-		<tr>   
-			<td>Name~~~~~</td> 
-			<td>Type~~~~~</td>
+	    <h3>Behold, the fine <%= v %>s on sale !</h3>
+	    <table id="tb">
+		<tr id="hd1">
+			<td>Name</td>
+			<td>Type</td>
 			<td>
-						
+
 							<% if(v.equals("mobile"))
-									out.write("Topspeed~~~~~");
+									out.write("Topspeed");
 								else if(v.equals("laptop"))
-									out.write("Wingspan~~~~~");
-								else 
-									out.write("Mileage~~~~~");%>
-						
+									out.write("Wingspan");
+								else
+									out.write("Mileage");%>
+
 			</td>
 			<td>
-						
+
 							<% if(v.equals("mobile"))
-									out.write("Width~~~~~");
+									out.write("Width");
 								else if(v.equals("laptop"))
-									out.write("Capacity~~~~~");
-								else 
-									out.write("ram~~~~~");%>
-						
+									out.write("Capacity");
+								else
+									out.write("ram");%>
+
 			</td>
-			<td>ItemID~~~~~</td> 
-			<td>Seller~~~~~~~~~~~~~~~~</td> 
-			<td>View Seller~~~~~</td>
-			<td>Current bid~~~~~</td>
-			<td>End date~~~~~</td>
+			<td>ItemID</td>
+			<td>Seller</td>
+			<td>View Seller</td>
+			<td>Current bid</td>
+			<td>End date</td>
 			<td>View Auction</td>
 		</tr>
 			<%
 			//parse out the results
-			while (result.next()) { 
+			while (result.next()) {
 				String itemID = result.getString("itemID");%>
-				<tr>    
+				<tr id="td1">
 					<td>
-						
+
 							<%= result.getString("name") %>
-						
+
 					</td>
 					<td>
-						
+
 							<%= result.getString(v + "_type") %>
-						
+
 					</td>
-					
-					
+
+
 					<td>
-						
+
 							<% if(v.equals("mobile"))
 									out.write(result.getString("megapixels"));
 								else if(v.equals("laptop"))
 									out.write(result.getString("storage"));
-								else 
+								else
 									out.write(result.getString("storage"));%>
-						
+
 					</td>
 					<td>
-						
+
 							<% if(v.equals("mobile"))
 									out.write(result.getString("ram"));
 								else if(v.equals("laptop"))
 									out.write(result.getString("ram"));
-								else 
+								else
 									out.write(result.getString("ram"));%>
-						
+
 					</td>
 					<td><%= result.getString("itemID")%></td>
 					<td><%= result.getString("email") %></td>
 					<td>
-							<a href="viewUser.jsp?email=<%=result.getString("email")%>">View this user</a>
+							<a id="tbl" href="viewUser.jsp?email=<%=result.getString("email")%>">View this user</a>
 					</td>
 						<td>
-							<% 
+							<%
 								Statement stmt2 = con.createStatement();
 								String query2 = "SELECT MAX(AMOUNT) AS amount FROM bid WHERE bidID IN ";
 								query2+= " (SELECT bidID FROM bidFor WHERE itemID = " + itemID + ")";
@@ -122,18 +194,19 @@ try {
 						</td>
 						<td><%= result.getString("endDate") %></td>
 						<td>
-							<a href="viewauction.jsp?itemID=<%=itemID%>">View this auction</a>
+							<a id="tbl" href="viewauction.jsp?itemID=<%=itemID%>">View this auction</a>
 						</td>
 				</tr>
-				
+
 
 			<% }
 			//close the connection.
 			db.closeConnection(con);
 			%>
 		</table>
+		<br>
 		<form method="get" action="browsefilter.jsp">
-					<select name="sortBy" size=1>
+					<select id="bt1" name="sortBy" size=1>
 						<option value="name">Sort by name</option>
 						<option value="itemID">Sort by itemID</option>
 						<option value="endDate">Sort by end date</option>
@@ -149,40 +222,42 @@ try {
 							<option value="storage">Sort by speed</option>
 							<option value="ram">Sort by ram</option>
 							<option value="assembled_cpu_type">Sort by assembled_cpu type</option><%} %>
-					</select>&nbsp;<br> 
-					<input type="submit" value="SORT!">
-					<input name = "vehicleCategory" type = "hidden" value = <%=v %>>
+					</select>&nbsp;
+					<input id="bt1" type="submit" value="SORT!">
+					<input id="bt1" name = "vehicleCategory" type = "hidden" value = <%=v %>>
 		</form>
-		<br>
-		
-		You can search by: <%=v %> type, name, or any attribute value (just type in the number!)
+
+		<h3>You can search by: <%=v %> type, name, or any attribute value (just type in the number!)</h3>
 		<form method="post" action="searchfilter.jsp">
-			<table>
-				<tr><td><input type="text" name="searchTerm"></td></tr>
+			<table id="st">
+				<tr>
+				<td><input id="bt1" type="text" name="searchTerm"></td>
+	            <td><input id="bt1" type="submit" value="Search!">
+                    			<input id="bt1" name = "vehicleCategory" type = "hidden" value = <%=v %>></td>
+				</tr>
 			</table>
-			<input type="submit" value="Search!">
+
+		</form>
+
+
+		<h3>Set an alert: fill in fields that are specific to the item you want, leave others blank if any will do.</h3>
+
+		<form method="post" action="alertpage.jsp">
+			<table>
+				<tr><td id="l1">Name :</td></tr>
+				<tr><td><input id="lb1" type="text" name="name"></td></tr>
+				<tr><td id="l1"><%=v %> Type :</td></tr>
+				<tr><td><input id="lb1"  type="text" name= "type"></td></tr>
+				<tr><td id="l1"><%=att1 %> :</td></tr>
+				<tr><td><input id="lb1"  type="text" name="att1"></td></tr>
+				<tr><td id="l1"><%=att2 %> :</td></tr>
+				<tr><td><input id="lb1"  type="text" name="att2"></td></tr>
+			</table><br>
+			<input id="bt1" type="submit" value="Set Alert">
 			<input name = "vehicleCategory" type = "hidden" value = <%=v %>>
 		</form>
 		<br><br>
-		
-		Set an alert: fill in fields that are specific to the item you want, leave others blank if any will do.
-			
-		<form method="post" action="alertpage.jsp">
-			<table>
-				<tr><td>Name</td></tr>
-				<tr><td><input type="text" name="name"></td></tr>
-				<tr><td><%=v %> Type</td></tr>
-				<tr><td><input type="text" name= "type"></td></tr>
-				<tr><td><%=att1 %></td></tr>
-				<tr><td><input type="text" name="att1"></td></tr>
-				<tr><td><%=att2 %></td></tr>
-				<tr><td><input type="text" name="att2"></td></tr>
-			</table>
-			<input type="submit" value="Set Alert">
-			<input name = "vehicleCategory" type = "hidden" value = <%=v %>>
-		</form>
-		
-		<a href="browse.jsp?sortBy=itemID">Back to all auctions</a>
+		<a id="backbutton" href="browse.jsp?sortBy=itemID">Back to all auctions</a>
 	    <% 
 	    con.close();
 	} catch (Exception ex) {

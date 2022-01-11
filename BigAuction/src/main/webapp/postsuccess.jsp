@@ -7,12 +7,52 @@
 <head>
 <meta charset="UTF-8">
 <title>Auction Created Successfully!</title>
-</head>
-<body style="background-color:bisque;">
+<style>
+body{
+background-color: #328f8a;
+          background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+          height:710px;
+}
 
-	<h1 style="font-size:40px"> Your Auction has been created.</h1>
-	
-	<a href="success.jsp">Return to menu</a>
+#box{
+width:40%;
+background-color:white;
+height: 130px;
+border-radius: 20px;
+text-align:center;
+padding:10px;
+margin-left:30%;
+margin-top:80px;
+}
+h2{
+color:#328f8a;
+}
+#bt3{
+color:white;;
+border:none;
+font:17px;
+padding:12px 8px 12px 8px;
+border-radius:10px;
+background-color:#328f8a;
+text-decoration:none;
+}
+#bt3:hover{
+background-color:white;
+color:#328f8a;
+border:2px solid #328f8a;
+border-radius:10px;
+font:17px;
+padding:12px 8px 12px 8px;
+
+}
+</style>
+</head>
+
+<body style="background-color:bisque;">
+ <div id="box">
+	<h2> Your Auction has been created !</h2><br>
+	<a id="bt3" href="success.jsp">Return to menu</a>
+	</div>
 	
 <%
 	

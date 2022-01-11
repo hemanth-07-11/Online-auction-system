@@ -9,7 +9,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Account Page</title>
 <style>
-    ul li { margin-bottom: 20px; }
+    ul li { margin-bottom: 20px;
+
+     }
+    #bt{
+        background-color:white;
+          color:#328f8a;
+          }
+    body{
+    background-color: #328f8a;
+              background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+              height:710px;
+    }
 </style>
 </head>
 
@@ -26,9 +37,9 @@
 		<!--&nbsp;  -->
 
 		<div style="width:500px;">
-            <a href='postauction.jsp'><button type="submit" class="msgBtn" onClick="postauction.jsp" style="text-align: left;display:inline-block;background-color: #008CBA; border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;margin: 4px 2px;cursor: pointer;">Post An Auction</button></a>
-            <a href='browse.jsp'><button type="submit" class="msgBtn2" onClick="browse.jsp" style="text-align: center;	display:inline-block;background-color: #008CBA; border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;margin: 4px 2px;cursor: pointer;">Browse</button></a>
-            <a href='logout.jsp'><button class="msgBtnBack" onClick="logout.jsp" style="text-align: right;display:inline-block;background-color: #008CBA; border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;margin: 4px 2px;cursor: pointer;">Log out</button></a>
+            <a id="bt" href='postauction.jsp'><button type="submit" class="msgBtn" onClick="postauction.jsp" style="text-align: left;display:inline-block;background-color: #008CBA; border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;margin: 4px 2px;cursor: pointer;">Post An Auction</button></a>
+            <a id="bt" href='browse.jsp'><button type="submit" class="msgBtn2" onClick="browse.jsp" style="text-align: center;	display:inline-block;background-color: #008CBA; border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;margin: 4px 2px;cursor: pointer;">Browse</button></a>
+            <a id="bt" href='logout.jsp'><button class="msgBtnBack" onClick="logout.jsp" style="text-align: right;display:inline-block;background-color: #008CBA; border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;margin: 4px 2px;cursor: pointer;">Log out</button></a>
         </div>
          <%
          ApplicationDB db = new ApplicationDB();
