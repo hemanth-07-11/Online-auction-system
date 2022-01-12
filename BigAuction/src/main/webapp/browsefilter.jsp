@@ -9,9 +9,10 @@
 <title>Browse!</title>
 <style>
 body{
-          background-color: #328f8a;
+         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+          background-image: url('download.jpg');
         margin-left:3%;
-            background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+        font-family: "Roboto", sans-serif;
 height:710px;
 }
 h3{
@@ -20,55 +21,146 @@ font-weight:bold;
 }
 
 #backbutton{
-font: 15px;
-  text-decoration: none;
-  background-color: #EEEEEE;
-  color: #333333;
-  padding: 10px 10px 10px 10px;
-
-  width:200px;
-  height:50px;
-  border-radius:15px;
+   border: 2px solid #fff;
+    background-color: transparent;
+   color:white;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration:none;
 
 }
-
-#backbutton:hover{
-color: #328f8a;
-
+.search{
+float:right;
 }
-#bt1{
+.browse{
+float:left;
+}
+
+        #backbutton:hover{
+     background: #9137d4;
+     border: 2px solid #9137d4;
+
+        }
+#bt2{
 
 border:none;
-font:17px;
-padding:8px 6px 6px 8px;
+font:25px;
+text-align:center;
+padding:20px;
 border-radius:8px;
 }
+
+#bt1
+{
+   border: 2px solid #fff;
+    background-color: transparent;
+   color:white;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration:none;
+}
+
+#bt1:hover
+{
+     background: #9137d4;
+     border: 2px solid #9137d4;
+}
+
 #st{
 border-spacing:0.5rem;
 }
+
 #hd1{
-background-color:white;
+background-color: #172fab;
 font-weight:bold;
-}
-#tbl{
 color:white;
+  padding: 20px;
+}
+
+        #hd1:hover
+        {
+                    transform: scale(1.02);
+                box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+                }
+
+#tbl{
+color:blue;
 text-decoration:none;
 font-weight:bold;
+  padding: 0.1px;
 }
 
 #tb{
 width :96%;
+background-color:white;
 text-align:center;
-
-border:2px solid white;
-padding:0;
+  padding: 20px;
 border-collapse:collapse;
-height:135px;
+height:250px;
+}
+
+.dropbtn {
+   border: 2px solid #fff;
+    background-color: transparent;
+   color:white;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+     background: #9137d4;
+     border: 2px solid #9137d4;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background: #9137d4;
 }
 #td1{
-color :white;
+            color :black;
+            background-color:#F2F2F2;
+            border-bottom: 1px solid #ddd;
 font-size:16px;
+  padding: 2px;
+
 }
+
+        #td1:hover
+        {
+            transform: scale(1.02);
+        box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+        }
+
 #lb1{
 color:white;
 padding:8px 4px 4px 8px;
@@ -78,22 +170,23 @@ border:none;
 #l1{
 color:white;
 }
+
 </style>
 </head>
 <body>
-	
-<% 
+
+<%
 try {
-		
+
 		//Get the database connection
-		ApplicationDB db = new ApplicationDB();	
+		ApplicationDB db = new ApplicationDB();
 		Connection con = db.getConnection();
-		
+
 		//Create a SQL statement
 		Class.forName("com.mysql.jdbc.Driver");
 		Statement stmt = con.createStatement();
 		ResultSet result;
-		String v = request.getParameter("vehicleCategory");
+		String v = request.getParameter("itemtypes");
 		String att1 = "", att2= "", att1Value= "", att2Value= "", name= "", type= "", endDate = "";
 		if(v.equals("mobile")){att1 = "megapixels"; att2 = "ram";}
 		else if(v.equals("laptop")) {att1 = "storage"; att2 = "ram";}
@@ -106,37 +199,40 @@ try {
 		System.out.println(query);
 	    result = stmt.executeQuery(query);
 	    %>
-	    <h3>Behold, the fine <%= v %>s on sale !</h3>
+	    <br><br>
+	    <br>
+	    <center><h3>Better Bidder - The Premium <%= v %>s for Auction !!! </h3></center>
+	     <br> <br>
 	    <table id="tb">
 		<tr id="hd1">
-			<td>Name</td>
-			<td>Type</td>
+			<td>NAME</td>
+			<td>TYPE</td>
 			<td>
 
 							<% if(v.equals("mobile"))
-									out.write("Topspeed");
+									out.write("MEGAPIXELS");
 								else if(v.equals("laptop"))
-									out.write("Wingspan");
+									out.write("STORAGE");
 								else
-									out.write("Mileage");%>
+									out.write("STORAGE");%>
 
 			</td>
 			<td>
 
 							<% if(v.equals("mobile"))
-									out.write("Width");
+									out.write("RAM");
 								else if(v.equals("laptop"))
-									out.write("Capacity");
+									out.write("RAM");
 								else
-									out.write("ram");%>
+									out.write("RAM");%>
 
 			</td>
-			<td>ItemID</td>
-			<td>Seller</td>
-			<td>View Seller</td>
-			<td>Current bid</td>
-			<td>End date</td>
-			<td>View Auction</td>
+			<td>ITEMID</td>
+			<td>SELLER</td>
+			<td>VIEW SELLER</td>
+			<td>CURRENT BID</td>
+			<td>END DATE</td>
+			<td>VIEW AUCTION</td>
 		</tr>
 			<%
 			//parse out the results
@@ -205,65 +301,62 @@ try {
 			%>
 		</table>
 		<br>
-		<form method="get" action="browsefilter.jsp">
-					<select id="bt1" name="sortBy" size=1>
-						<option value="name">Sort by name</option>
-						<option value="itemID">Sort by itemID</option>
-						<option value="endDate">Sort by end date</option>
-						<%if(v.equals("mobile")) {%>
-							<option value="megapixels">Sort by speed</option>
-							<option value="ram">Sort by ram</option>
-							<option value="mobile_type">Sort by mobile type</option>
-						<%}if(v.equals("laptop")) {%>
-							<option value="storage">Sort by storage</option>
-							<option value="ram">Sort by ram</option>
-							<option value="laptop_type">Sort by laptop type</option>
-						<%}if(v.equals("assembled_cpu")) {%>
-							<option value="storage">Sort by speed</option>
-							<option value="ram">Sort by ram</option>
-							<option value="assembled_cpu_type">Sort by assembled_cpu type</option><%} %>
-					</select>&nbsp;
-					<input id="bt1" type="submit" value="SORT!">
-					<input id="bt1" name = "vehicleCategory" type = "hidden" value = <%=v %>>
-		</form>
 
-		<h3>You can search by: <%=v %> type, name, or any attribute value (just type in the number!)</h3>
+		 <div class="browse">
+		 <br>
+		<form method="get" action="browsefilter.jsp">
+		<div class="dropdown">
+                        <button class="dropbtn">Sort by</button>
+                         <div class="dropdown-content">
+
+						<%if(v.equals("mobile")) {%>
+						<a href="browsefilter.jsp?sortBy=name&itemtypes=mobile" value="name">Sort by name</a>
+						<a href="browsefilter.jsp?sortBy=endDate&itemtypes=mobile" value="endDate">Sort by end date</a>
+							<a href="browsefilter.jsp?sortBy=megapixels&itemtypes=mobile" value="megapixels">Sort by megapixels</a>
+							<a href="browsefilter.jsp?sortBy=ram&itemtypes=mobile" value="ram">Sort by ram</a>
+							<a href="browsefilter.jsp?sortBy=mobile_type&itemtypes=mobile" value="mobile_type">Sort by mobile type</a>
+						<%}if(v.equals("laptop")) {%>
+							<a href="browsefilter.jsp?sortBy=name&itemtypes=laptop" value="name">Sort by name</a>
+							<a href="browsefilter.jsp?sortBy=storage&itemtypes=laptop" value="storage">Sort by storage</a>
+							<a href="browsefilter.jsp?sortBy=endDate&itemtypes=laptop" value="endDate">Sort by end date</a>
+							 <a href="browsefilter.jsp?sortBy=ram&itemtypes=laptop" value="ram">Sort by ram</a>
+							<a href=" browsefilter.jsp?sortBy=laptop_type&itemtypes=laptop" value="laptop_type">Sort by laptop type</a>
+						<%}if(v.equals("assembled_cpu")) {%>
+						<a href="browsefilter.jsp?sortBy=name&itemtypes=assembled_cpu" value="name">Sort by name</a>
+						<a href="browsefilter.jsp?sortBy=endDate&itemtypes=assembled_cpu" value="endDate">Sort by end date</a>
+							<a href="browsefilter.jsp?sortBy=storage&itemtypes=assembled_cpu" value="storage">Sort by storage</a>
+							<a href="browsefilter.jsp?sortBy=ram&itemtypes=assembled_cpu" value="ram">Sort by ram</a>
+							<a href="browsefilter.jsp?sortBy=assembled_cpu_type&itemtypes=assembled_cpu" value="assembled_cpu_type">Sort by assembled_cpu type</a><%} %>
+					                      </div>
+                                        </div>
+		</form><br><br><br>
+		<a id="backbutton" href="browse.jsp?sortBy=itemID">Back to all auctions</a>
+		</div>
+        <div class="search">
+		<h3>Search by: <%=v %> name /  type / any attribute &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h3><br>
 		<form method="post" action="searchfilter.jsp">
 			<table id="st">
 				<tr>
-				<td><input id="bt1" type="text" name="searchTerm"></td>
+				<td><input id="bt2" type="text" name="searchTerm"></td>
 	            <td><input id="bt1" type="submit" value="Search!">
-                    			<input id="bt1" name = "vehicleCategory" type = "hidden" value = <%=v %>></td>
+                    			<input id="bt1" name = "itemtypes" type = "hidden" value = <%=v %>></td>
 				</tr>
 			</table>
 
 		</form>
+</div>
 
-
-		<h3>Set an alert: fill in fields that are specific to the item you want, leave others blank if any will do.</h3>
-
-		<form method="post" action="alertpage.jsp">
-			<table>
-				<tr><td id="l1">Name :</td></tr>
-				<tr><td><input id="lb1" type="text" name="name"></td></tr>
-				<tr><td id="l1"><%=v %> Type :</td></tr>
-				<tr><td><input id="lb1"  type="text" name= "type"></td></tr>
-				<tr><td id="l1"><%=att1 %> :</td></tr>
-				<tr><td><input id="lb1"  type="text" name="att1"></td></tr>
-				<tr><td id="l1"><%=att2 %> :</td></tr>
-				<tr><td><input id="lb1"  type="text" name="att2"></td></tr>
-			</table><br>
-			<input id="bt1" type="submit" value="Set Alert">
-			<input name = "vehicleCategory" type = "hidden" value = <%=v %>>
-		</form>
+ <div class="back">
 		<br><br>
-		<a id="backbutton" href="browse.jsp?sortBy=itemID">Back to all auctions</a>
-	    <% 
+
+  </div>
+	    <%
 	    con.close();
 	} catch (Exception ex) {
 		out.print(ex);
 		out.print("<br>some broblems teehee");
-	}
+}
+
 %>
 
 

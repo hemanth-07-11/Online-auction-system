@@ -6,81 +6,84 @@
 <meta charset="UTF-8">
 <title>Create Your Mobile Auction</title>
 <style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 body{
-          background-color: #328f8a;
-          background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+font-family: "Roboto", sans-serif;
+  background-image: url('download.jpg');
+  background-attachment:fixed;
           height:710px;
 
 
 }
 h2{
+margin-top:4rem;
 color:white;
 margin-left:42%;
 }
 
 form{
 margin-top:70px;
-margin-left:35%;
+margin-left:40%;
 border: 3px solid white;
-border-radius:10px;
-width:30%;
+border-radius:5px;
+width:20%;
 height:470px;
-padding:15px 15px;
+padding:30px 30px;
 background-color:white;
 }
 h3{
-color:#328f8a;
+color:#982bd2;
 font-weight:bold;
 }
 #bt2{
 
-border:1px solid #328f8a;
+border:1px solid #081285;
 font:17px;
 padding:8px 8px 8px 8px;
-border-radius:8px;
+border-radius:2px;
+margin-bottom:0.5rem;
 width:270px;
+padding-left:2rem;
 }
 #bt1{
 
-border:1px solid #328f8a;
+border:1px solid #081285;
 font:17px;
 padding:8px 8px 8px 8px;
-border-radius:8px;
+border-radius:2px;
+margin-bottom:0.5rem;
 }
 #bt3{
-color:white;;
-border:none;
-font:17px;
-padding:12px 8px 12px 8px;
-border-radius:10px;
-background-color:#328f8a;
+              border: 2px solid #fff;
+                  background: #473bcd;
+                 color:white;
+                padding: 16px;
+                font-size: 16px;
+                cursor: pointer;
+                text-decoration:none;
 }
 #bt3:hover{
-background-color:white;
-color:#328f8a;
-border:2px solid #328f8a;
-border-radius:10px;
-font:17px;
-padding:12px 8px 12px 8px;
+          background: #67cbda;
+          color:black;
 }
 </style>
 </head>
 <body style="background-color:bisque;">
     <h2>Create Your Mobile Auction!</h2>
 	<form method="post" action="mobileauc.jsp">
-	<h3>Model/Mobile Name :</h3>
+	<h3>Mobile Name :</h3>
 	<input id="bt2" type="text" name="name">
 	<br>
-	<h3>Top Speed (Ghz) :</h3>
+	<h3>Mega Pixels ( MP ):</h3>
 	<input id="bt2" type="text" name="megapixels">
 	<br>
-	<h3>Width (inch) :</h3>
+	<h3>Ram </h3>
 	<input id="bt2" type="text" name="ram">
-	<h3>Type of Mobile:</h3>
+	<h3>Mobile Type</h3>
 	<select id="bt1" name = "mobile_type" id = "mobile_type" >
-					<option>Battery saver</option>
-					<option>Performance</option>
-					<option>Value for Money</option>
+					<option>Android</option>
+					<option>Apple</option>
+					<option>Oxygen</option>
 	</select>
 	<br><br>
 	<input id="bt3" type="submit" value="Create Your Mobile Auction!">

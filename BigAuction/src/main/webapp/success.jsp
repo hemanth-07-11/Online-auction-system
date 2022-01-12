@@ -9,22 +9,132 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Account Page</title>
 <style>
-    ul li { margin-bottom: 20px;
+   body {
+            background-image: url('download.jpg');
+            background-attachment:fixed;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+     color: #43A047;
+     font-family: "Open Sans", sans-serif;
+     overflow:hidden;
+   }
 
+   a {
+     text-decoration: none;
+     color: #03C4EB;
+     transition: 0.5s;
+   }
+
+   a:hover, a:active, a:focus {
+     color: #03c5ec;
+     outline: none;
+     text-decoration: none;
+   }
+
+   p {
+     padding: 0;
+     margin: 0 0 30px 0;
+   }
+
+   h1{
+   font-size:3rem;
+
+   }
+
+   h2, h3, h4, h5, h6 {
+     font-family: "Raleway", sans-serif;
+     font-weight: 400;
+     margin: 0 0 20px 0;
+     padding: 0;
+   }
+
+   #hero {
+     display: table;
+     width: 100%;
+     height: 100vh;
+   }
+   @media (min-width: 1024px) {
+     #hero {
+       background-attachment: fixed;
      }
-    #bt{
-        background-color:white;
-          color:#328f8a;
-          }
-    body{
-    background-color: #328f8a;
-              background-image: linear-gradient(45deg,#328f8a,#08ac4b);
-              height:710px;
-    }
+   }
+   #hero .hero-container {
+     background: rgba(0, 0, 0, 0.8);
+     display: table-cell;
+     margin: 0;
+     padding: 0;
+     text-align: center;
+     vertical-align: middle;
+   }
+   #hero h1 {
+     margin: 30px 0 10px 0;
+     font-weight: 700;
+     line-height: 48px;
+     text-transform: uppercase;
+     color: #fff;
+   }
+   @media (max-width: 768px) {
+     #hero h1 {
+       font-size: 28px;
+       line-height: 36px;
+     }
+   }
+   #hero h2 {
+     color: #ccc;
+     margin-bottom: 50px;
+   }
+   #hero h2 span {
+     color: #fff;
+     transition: 0.3s;
+     border-bottom: 2px solid #03C4EB;
+   }
+   @media (max-width: 768px) {
+     #hero h2 {
+       font-size: 24px;
+       line-height: 26px;
+       margin-bottom: 30px;
+     }
+     #hero h2 .rotating {
+       display: block;
+     }
+   }
+   #hero .rotating > .animated {
+     display: inline-block;
+   }
+   #hero .actions a {
+     font-family: "Raleway", sans-serif;
+     text-transform: uppercase;
+     font-weight: 500;
+     font-size: 16px;
+     letter-spacing: 1px;
+     display: inline-block;
+     padding: 8px 20px;
+     border-radius: 2px;
+     transition: 0.5s;
+     margin: 10px;
+   }
+   #hero .btn-services {
+     border: 2px solid #fff;
+     color: #fff;
+   }
+   #hero .btn-services:hover {
+     background: #9137d4;
+     border: 2px solid #9137d4;
+   }
+
+   #header {
+     background: #0d0d0d;
+     transition: all 0.5s;
+     z-index: 997;
+     height: 70px;
+   }
 </style>
 </head>
 
-<body style="background-color:lightblue;">
+<body>
+  <section id="hero">
+    <div class="hero-container">
+      <div data-aos="fade-in">
 	<%
     	if ((session.getAttribute("user") == null)) {
 	%>
@@ -32,15 +142,16 @@
 		<a href="login.jsp">Please Login</a>
 	<%	} else {
 	%>
-		<h1 style="font-size:40px;text-transform:uppercase;text-align:center"> Welcome <%=session.getAttribute("user")%>!</h1>
-		
-		<!--&nbsp;  -->
-
-		<div style="width:500px;">
-            <a id="bt" href='postauction.jsp'><button type="submit" class="msgBtn" onClick="postauction.jsp" style="text-align: left;display:inline-block;background-color: #008CBA; border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;margin: 4px 2px;cursor: pointer;">Post An Auction</button></a>
-            <a id="bt" href='browse.jsp'><button type="submit" class="msgBtn2" onClick="browse.jsp" style="text-align: center;	display:inline-block;background-color: #008CBA; border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;margin: 4px 2px;cursor: pointer;">Browse</button></a>
-            <a id="bt" href='logout.jsp'><button class="msgBtnBack" onClick="logout.jsp" style="text-align: right;display:inline-block;background-color: #008CBA; border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;margin: 4px 2px;cursor: pointer;">Log out</button></a>
-        </div>
+		<h1> Hi <%=session.getAttribute("user")%>!</h1>
+		<h2>Welcome to Online Auction system</h2>
+		 <div class="actions">
+                  <a href='postauction.jsp' class="btn-services" onClick="postauction.jsp">Post an auction</a>
+                  <a href='browse.jsp' class="btn-services" onClick="browse.jsp">Browse</a>
+                  <a href='logout.jsp' class="btn-services" onClick="logout.jsp">Logout</a>
+                </div>
+         </div>
+    </div>
+  </section>
          <%
          ApplicationDB db = new ApplicationDB();
 		 Connection con = db.getConnection();
@@ -137,20 +248,6 @@ try {
 			    
 	    %>
 	    <table>
-		<tr>   
-			<td>ItemID~~~~~</td> 
-			<td>Notification text:</td>
-			<td>
-						
-							
-						
-			</td>
-			<td>
-						
-							
-						
-			</td>
-
 		</tr>
 			<%
 			//parse out the results
@@ -170,16 +267,11 @@ try {
 			db.closeConnection(con);
 			%>
 		</table>
-		<br>
-		
-
-		<br><br>
-		<a href="browse.jsp?sortBy=itemID">Back to all auctions</a>
 	    <% 
 	    con.close();
 	} catch (Exception ex) {
 		out.print(ex);
-		out.print("<br>some broblems teehee");
+		out.print("<br>some problem");
 	}
 %>
 

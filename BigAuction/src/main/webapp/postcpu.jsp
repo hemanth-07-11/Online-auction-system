@@ -6,10 +6,11 @@
 <meta charset="UTF-8">
 <title>Create Your Cpu Auction</title>
 <style>
-
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 body{
-          background-color: #328f8a;
-          background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+font-family: "Roboto", sans-serif;
+  background-image: url('download.jpg');
+  background-attachment:fixed;
           height:710px;
 
 
@@ -21,48 +22,47 @@ margin-left:42%;
 
 form{
 margin-top:70px;
-margin-left:35%;
+margin-left:40%;
 border: 3px solid white;
-border-radius:10px;
-width:30%;
+border-radius:5px;
+width:20%;
 height:470px;
-padding:15px 15px;
+padding:30px 30px;
 background-color:white;
 }
 h3{
-color:#328f8a;
+color:#982bd2;
 font-weight:bold;
 }
 #bt2{
 
-border:1px solid #328f8a;
+border:1px solid #081285;
 font:17px;
 padding:8px 8px 8px 8px;
-border-radius:8px;
+border-radius:2px;
+margin-bottom:0.5rem;
 width:270px;
 }
 #bt1{
 
-border:1px solid #328f8a;
+border:1px solid #081285;
 font:17px;
 padding:8px 8px 8px 8px;
-border-radius:8px;
+border-radius:2px;
+margin-bottom:0.5rem;
 }
 #bt3{
-color:white;;
 border:none;
-font:17px;
-padding:12px 8px 12px 8px;
-border-radius:10px;
-background-color:#328f8a;
+                  background: #473bcd;
+                 color:white;
+                padding: 16px;
+                font-size: 16px;
+                cursor: pointer;
+                text-decoration:none;
 }
 #bt3:hover{
-background-color:white;
-color:#328f8a;
-border:2px solid #328f8a;
-border-radius:10px;
-font:17px;
-padding:12px 8px 12px 8px;
+          background: #67cbda;
+          color:black;
 }
 </style>
 </head>
@@ -73,22 +73,20 @@ padding:12px 8px 12px 8px;
 	<h3>Model Name:</h3>
 	<input id="bt2" type="text" name="name">
 	<br>
-	<h3>Processor speed :</h3>
+	<h3>Storage ( GB )</h3>
 	<input id="bt2" type="text" name="storage">
 	<h3>RAM :</h3>
 	<select id="bt1" name = "ram" id = "ram" >
 					<option>8</option>
-					<option>12</option>
 					<option>16</option>
+					<option>32</option>
 	</select>
-	<h3>Type of Cpu:</h3>
+	<h3>Processor </h3>
 	<select id="bt1" name = "assembled_cpu_type" id = "assembled_cpu_type" >
-					<option>High performance</option>
-					<option>Gaming</option>
-					<option>Compact</option>
-					<option>Office work</option>
-					<option>Dual boot</option>
-					<option>Auto cooling</option>
+					<option>i3core4.4</option>
+					<option>i5core3.3</option>
+					<option>i7core3.6</option>
+
 	</select>
 	<br><br>
 	<input id="bt3" type="submit" value="Create Your CPU Auction!">

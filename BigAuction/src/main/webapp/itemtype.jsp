@@ -12,17 +12,17 @@
 	session.setAttribute("closeDate", request.getParameter("closeDate") );
 	session.setAttribute("closeTime", request.getParameter("closeTime") );
 	session.setAttribute("am_or_pm", request.getParameter("am_or_pm") );
-	String vehicleType = request.getParameter("vehicleType"); 
+	String itmtype = request.getParameter("itmtype");
 	%>
 	
 	<%
-	if (vehicleType.equals("Cpu")){
+	if (itmtype.equals("Cpu")){
 		response.sendRedirect("postcpu.jsp");
 	}
-	else if (vehicleType.equals("Mobile")){
+	else if (itmtype.equals("Mobile")){
 		response.sendRedirect("postmob.jsp");
 	}
-	else if (vehicleType.equals("Laptop")){
+	else if (itmtype.equals("Laptop")){
 		response.sendRedirect("postlap.jsp");
 	}
 	%>

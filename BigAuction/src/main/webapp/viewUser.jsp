@@ -8,53 +8,90 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Browse!</title>
 <style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 body{
-          background-color: #328f8a;
-          background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+font-family: "Roboto", sans-serif;
+background-image: url('download.jpg');
 height:710px;
-margin-left:4%;
+margin-left:5rem;
+margin-top:4rem;
 }
+
+h2{
+color:white;
+font-size:2rem;
+text-transform:uppercase;
+margin-left:20rem;
+}
+
 h3{
 color:white;
-font-weight:bold;
+text-transform:uppercase;
+margin-left:20rem;
 }
+
 #tb{
-border:2px solid white;
 width:55%;
 text-align:center;
+margin-left:20rem;
 height: 200px;
 border-collapse:collapse;
+ box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
 }
+
+
+
 #hd1{
-background-color:white;
-font-weight:bold;
+background-color: #172fab;
+            font-weight:bold;
+
+            color:white;
 }
 
-#td1{
-color :white;
-font-size:16px;
-}
+        #hd1:hover
+        {
+                    transform: scale(1.02);
+                box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+                }
 
+
+        #td1{
+            color :black;
+            background-color:#F2F2F2;
+            font-size:16px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #td1:hover
+        {
+            transform: scale(1.02);
+        box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+        }
 #tbl{
-color:white;
-text-decoration:none;
-font-weight:bold;
+            font-family: "Roboto", sans-serif;
+            color:blue;
+            text-decoration:none;
+            font-weight:bold;
 }
 #backbutton{
-font: 15px;
-  text-decoration: none;
-  background-color: #EEEEEE;
-  color: #333333;
-  padding: 10px 10px 10px 10px;
-
-  width:200px;
-  height:50px;
-  border-radius:15px;
+   border: 2px solid #fff;
+    background-color: transparent;
+   color:white;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration:none;
+  display: table;
+  left:50%;
+  margin-left:20rem;
 
 }
 
+
+
 #backbutton:hover{
-color: #328f8a;
+     background: #9137d4;
+     border: 2px solid #9137d4;
 
 }
 </style>
@@ -78,7 +115,7 @@ try {
 		System.out.println(query1);
 	    result = stmt.executeQuery(query1);
 	    %>
-	    <h3>Behold, the history of the user <%=email %></h3>
+	    <h2>Behold, the history of the user <%=email %></h2>
 	    <h3>Auctions in as seller:</h3>
 	    <table id="tb">
 		<tr id="hd1">

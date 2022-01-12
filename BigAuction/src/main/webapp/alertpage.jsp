@@ -21,7 +21,7 @@ try {
 		Class.forName("com.mysql.jdbc.Driver");
 		Statement stmt = con.createStatement();
 		ResultSet result;
-		String v = request.getParameter("vehicleCategory");
+		String v = request.getParameter("itemtypes");
 		String att1, att2;
 		if(v.equals("mobile")){att1 = "megapixels"; att2 = "ram";}
 		else if(v.equals("laptop")) {att1 = "storage"; att2 = "ram";}
