@@ -8,6 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Search Results</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -15,9 +16,9 @@
             background-image: url('download.jpg');
             margin-left: 3%;
             font-family: "Roboto", sans-serif;
+            background-attachment: fixed;
             height: 710px;
         }
-
 
         #tbl {
             color: blue;
@@ -27,8 +28,6 @@
 
         }
 
-
-
         #tb1 {
             width: 96%;
             text-align: center;
@@ -37,8 +36,6 @@
             height: 105px;
             text-decoration: none;
         }
-
-
 
         #tb2 {
             width: 36%;
@@ -137,7 +134,6 @@
         }
 
         input[type=submit] {
-
             font-family: "Raleway", sans-serif;
             text-transform: uppercase;
             color: white;
@@ -167,13 +163,12 @@
     <%
 try {
 
-		//Get the database connection
+
 		ApplicationDB db = new ApplicationDB();
 		Connection con = db.getConnection();
-
-		//Create a SQL statement
 		Class.forName("com.mysql.jdbc.Driver");
 		Statement stmt = con.createStatement();
+
 		ResultSet result;
 		String v = request.getParameter("itemtypes");
 		String att1, att2;
@@ -182,16 +177,13 @@ try {
 		else {att1 = "storage"; att2 = "ram";}
 		String term = request.getParameter("searchTerm");
 		if(term == null || term.equals("")) {response.sendRedirect("browse.jsp");}
-		/*String sort = request.getParameter("sortBy");
-		String query = "SELECT * FROM " + v + " AS v";
-		query+= " INNER JOIN seller s ON v.itemID = s.itemID ";
-		query+= " WHERE v.itemID IN (SELECT itemID FROM itemsSold WHERE auctionID IN";
-		query+= " (SELECT auctionID FROM auction WHERE valid = true)) GROUP BY v.itemID ORDER BY " + sort;*/
+
 		String query = "SELECT * FROM item AS i INNER JOIN " + v + " b ON i.itemID = b.itemID INNER JOIN seller s ON i.itemID = s.itemID INNER JOIN auction a ON i.itemID = a.auctionID";
 		query+=" WHERE i.name = '" + term + "' OR " + v + "_type = '" + term + "' OR " + att1 + " = '" + term + "' OR " + att2 + " = '" + term + "'";
 		System.out.println(query);
 	    result = stmt.executeQuery(query);
 	    %>
+
     <p>Behold the fine <%= v %>s on sale </p>
     <table id="tb1">
         <tr id="hd1">
@@ -208,7 +200,6 @@ try {
 
             </td>
             <td>
-
                 <% if(v.equals("mobile"))
 									out.write("Ram");
 								else if(v.equals("laptop"))
@@ -235,31 +226,24 @@ try {
 
             </td>
             <td>
-
                 <%= result.getString(v + "_type") %>
 
             </td>
-
-
             <td>
-
                 <% if(v.equals("mobile"))
 									out.write(result.getString("megapixels"));
 								else if(v.equals("laptop"))
 									out.write(result.getString("storage"));
 								else
 									out.write(result.getString("storage"));%>
-
             </td>
             <td>
-
                 <% if(v.equals("mobile"))
 									out.write(result.getString("ram"));
 								else if(v.equals("laptop"))
 									out.write(result.getString("ram"));
 								else
 									out.write(result.getString("ram"));%>
-
             </td>
             <td><%= result.getString("itemID")%></td>
             <td><%= result.getString("email") %></td>
@@ -283,10 +267,7 @@ try {
                 <a id="tbl" href="viewauction.jsp?itemID=<%=itemID%>">View this auction</a>
             </td>
         </tr>
-
-
         <% }
-			//close the connection.
 			db.closeConnection(con);
 			%>
     </table>
@@ -310,7 +291,6 @@ try {
         </form>
     </div>
     <br>
-
     <%
 	    con.close();
 	} catch (Exception ex) {
@@ -318,7 +298,6 @@ try {
 		out.print("<br>Oops!! Sorry, there is some problem!");
 	}
 %>
-
 </body>
 
 </html>

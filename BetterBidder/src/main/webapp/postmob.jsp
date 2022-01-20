@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Your Mobile Auction</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -14,8 +15,6 @@
             background-image: url('download.jpg');
             background-attachment: fixed;
             height: 710px;
-
-
         }
 
         h2 {
@@ -48,7 +47,6 @@
             border-radius: 2px;
             margin-bottom: 0.5rem;
             width: 270px;
-            padding-left: 2rem;
         }
 
         #bt1 {
@@ -77,7 +75,7 @@
     </style>
 </head>
 
-<body style="background-color:bisque;">
+<body>
     <h2>Create Your Mobile Auction!</h2>
     <form method="post" action="mobileauc.jsp">
         <h3>Mobile Name :</h3>

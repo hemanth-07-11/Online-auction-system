@@ -7,17 +7,20 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Browse!</title>
+    <title>Browse</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
         body {
             @import url(https://fonts.googleapis.com/css?family=Roboto:300);
             background-image: url('download.jpg');
+            background-attachment: fixed;
             margin-left: 3%;
             font-family: "Roboto", sans-serif;
             height: 710px;
         }
 
-        h3 {
+        h3,
+         h1{
             color: white;
             font-weight: bold;
         }
@@ -44,15 +47,13 @@
         #backbutton:hover {
             background: #9137d4;
             border: 2px solid #9137d4;
-
         }
 
         #bt2 {
-
             border: none;
-            font: 25px;
+            font-size: 25px;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
         }
 
@@ -181,15 +182,12 @@
 <body>
 
     <%
-try {
-
-		//Get the database connection
+        try {
 		ApplicationDB db = new ApplicationDB();
 		Connection con = db.getConnection();
-
-		//Create a SQL statement
 		Class.forName("com.mysql.jdbc.Driver");
 		Statement stmt = con.createStatement();
+
 		ResultSet result;
 		String v = request.getParameter("itemtypes");
 		String att1 = "", att2= "", att1Value= "", att2Value= "", name= "", type= "", endDate = "";
@@ -204,10 +202,11 @@ try {
 		System.out.println(query);
 	    result = stmt.executeQuery(query);
 	    %>
+
     <br><br>
     <br>
     <center>
-        <h3>Better Bidder - The Premium <%= v %>s for Auction !!! </h3>
+        <h1>Better Bidder - The Premium <%= v %>s for Auction !!! </h1>
     </center>
     <br> <br>
     <table id="tb">
@@ -215,7 +214,6 @@ try {
             <td>NAME</td>
             <td>TYPE</td>
             <td>
-
                 <% if(v.equals("mobile"))
 									out.write("MEGAPIXELS");
 								else if(v.equals("laptop"))
@@ -225,7 +223,6 @@ try {
 
             </td>
             <td>
-
                 <% if(v.equals("mobile"))
 									out.write("RAM");
 								else if(v.equals("laptop"))
@@ -242,41 +239,30 @@ try {
             <td>VIEW AUCTION</td>
         </tr>
         <%
-			//parse out the results
 			while (result.next()) {
 				String itemID = result.getString("itemID");%>
         <tr id="td1">
             <td>
-
                 <%= result.getString("name") %>
-
             </td>
             <td>
-
                 <%= result.getString(v + "_type") %>
-
             </td>
-
-
             <td>
-
                 <% if(v.equals("mobile"))
 									out.write(result.getString("megapixels"));
 								else if(v.equals("laptop"))
 									out.write(result.getString("storage"));
 								else
 									out.write(result.getString("storage"));%>
-
             </td>
             <td>
-
                 <% if(v.equals("mobile"))
 									out.write(result.getString("ram"));
 								else if(v.equals("laptop"))
 									out.write(result.getString("ram"));
 								else
 									out.write(result.getString("ram"));%>
-
             </td>
             <td><%= result.getString("itemID")%></td>
             <td><%= result.getString("email") %></td>
@@ -300,22 +286,17 @@ try {
                 <a id="tbl" href="viewauction.jsp?itemID=<%=itemID%>">View this auction</a>
             </td>
         </tr>
-
-
         <% }
-			//close the connection.
 			db.closeConnection(con);
 			%>
     </table>
     <br>
-
     <div class="browse">
         <br>
         <form method="get" action="browsefilter.jsp">
             <div class="dropdown">
                 <button class="dropbtn">Sort by</button>
                 <div class="dropdown-content">
-
                     <%if(v.equals("mobile")) {%>
                     <a href="browsefilter.jsp?sortBy=name&itemtypes=mobile" value="name">Sort by name</a>
                     <a href="browsefilter.jsp?sortBy=endDate&itemtypes=mobile" value="endDate">Sort by end date</a>
@@ -369,7 +350,6 @@ try {
 		out.print(ex);
 		out.print("<br>Oops!! Sorry, there is some problem!");
 }
-
 %>
 </body>
 

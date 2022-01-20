@@ -9,7 +9,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Start Page</title>
+    <title>Login</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <script>
         $('.message a').click(function () {
             $('form').animate({
@@ -144,10 +145,11 @@
         }
 
         body {
-            background-image: url('download.jpg');
+            background-image: url('main.jpg');
             font-family: "Roboto", sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-attachment: fixed;
         }
     </style>
     <h1> Welcome to Better bidder Auction </h1>

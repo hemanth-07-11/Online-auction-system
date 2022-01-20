@@ -7,8 +7,10 @@
 <html>
 
 <head>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Account Page</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
         body {
             background-image: url('download.jpg');
@@ -17,6 +19,7 @@
             -moz-osx-font-smoothing: grayscale;
             color: #43A047;
             font-family: "Open Sans", sans-serif;
+            overflow:hidden;
         }
 
         a {
@@ -152,21 +155,22 @@
             height: 70px;
         }
 
-        input[type="text"]{
-            width:35%;
-            height:35px;
-            border:2px solid #D3D3D3;;
-            border-radius:0.3rem;
-            font-size:inherit;
-            background:none;
-            color:white;
-            padding:10px;
-            outline:none;
-        }
-        input[type="text"]:{
-            background: #adffff;
+        input[type="text"] {
+            width: 35%;
+            height: 35px;
+            border: 2px solid #D3D3D3;
+            ;
+            border-radius: 0.3rem;
+            font-size: inherit;
+            background: none;
+            color: white;
+            padding: 10px;
+            outline: none;
         }
 
+        input[type="text"]: {
+            background: #adffff;
+        }
     </style>
 </head>
 
@@ -184,8 +188,8 @@
                 <h1> Hi <%=session.getAttribute("user")%>!</h1>
                 <h2>Welcome to Better bidder Auction</h2>
                 <div class="actions">
-                    <a href='postauction.jsp' class="btn-services" onClick="postauction.jsp">Post an auction</a>
                     <a href='browse.jsp' class="btn-services" onClick="browse.jsp">Browse</a>
+                    <a href='postauction.jsp' class="btn-services" onClick="postauction.jsp">Post an auction</a>
                     <a href='logout.jsp' class="btn-services" onClick="logout.jsp">Logout</a>
                 </div>
             </div>
@@ -200,7 +204,6 @@
             <form method="post">
                 <h3>Add Questions</h3>
                 <input type="text" name="command">
-
                 <br>
             </form>
         </div>
@@ -209,58 +212,47 @@
     <%
          ApplicationDB db = new ApplicationDB();
 		 Connection con = db.getConnection();
-         String entity = request.getParameter("command");
+		 String entity=null;
+         entity = request.getParameter("command");
+         if(entity!=null){
          String str = "insert into questions (question,answer) values ('" + entity + "', 'No answer')";
          System.out.println(str);
          con.createStatement().executeUpdate(str);
 
-         %>
+         }
+
+        %>
     <br>
-
     <br>
-
-    Notifications:
-
     <%
 	    }
 	%>
 
     <%
-try {
-
-		//Get the database connection
-		ApplicationDB db = new ApplicationDB();
+        try {
+     	ApplicationDB db = new ApplicationDB();
 		Connection con = db.getConnection();
-
-		//Create a SQL statement
 				Class.forName("com.mysql.jdbc.Driver");
 				Statement stmt = con.createStatement();
 				ResultSet result, rs2, rs3, rs4;
 				String email = (String)session.getAttribute("email"); System.out.println(email);
-				String query = "SELECT * FROM notifications WHERE email = '" + email + "'";
-				System.out.println(query);
-			    result = con.createStatement().executeQuery(query);
-			    // find the auctions that have ended
+
 			    rs2 = con.createStatement().executeQuery("SELECT A.auctionID, A.valid, A.reserve "
 			    		+ "FROM auction AS A "
 			    		+ "WHERE A.endDate < curdate()");
-			    // if there are auctions that have ended
 			    String auctionID = "", valid = "", reserve = "", highestBid = "", currentEmail = "";
 			    double highestBidNum = 0, reserveNum = 0;
 			    if(rs2.isBeforeFirst()) {
-			    	// go through every auction that has ended
+
 			    	while(rs2.next()) {
-			    		// get the auctionID, validity, and reserve of every auction that ended
 				    	valid = rs2.getString("valid");
 				    	auctionID = rs2.getString("auctionID");
 				    	reserve = rs2.getString("reserve");
-				    	if (valid.equals("0")) // if the auction has already ended skip to the next row
+				    	if (valid.equals("0"))
 				    		continue;
 				    	else {
-				    		// otherwise set the validity to false
 				    		con.createStatement().executeUpdate("UPDATE auction SET valid = 0 WHERE auctionID = " + auctionID);
-			    			// get the highest bid on the auction that ended
-						    rs3 = con.createStatement().executeQuery("SELECT MAX(AMOUNT) AS amount FROM bid WHERE bidID IN "
+			    			 rs3 = con.createStatement().executeQuery("SELECT MAX(AMOUNT) AS amount FROM bid WHERE bidID IN "
 						    		+ " (SELECT bidID FROM bidFor WHERE itemID = " + auctionID + ")");
 						    rs3.next();
 						    if(rs3.getString("amount")!=null) {
@@ -269,100 +261,17 @@ try {
 						    else {
 						    	highestBid = "0";
 						    }
-						    // check if the highest bid is higher than the reserve
-						    highestBidNum = Double.parseDouble(highestBid);
-						    reserveNum = Double.parseDouble(reserve);
-						    if (reserveNum > highestBidNum) { // if the reserve is higher (strictly?) than the last bid none is the winner.
-						    	; // do nothing except set valid to false (already done)
-						    }
-						    else {
-						    	// alert the winner (whoever placed the highest bid) that they won
-						    	// get the email of whoever placed the highest bid on this item
-						    	rs4 = con.createStatement().executeQuery("SELECT BU.email, B.amount, B.bidID, BU.itemID, BU.auctionID "
-						    			+ "FROM buyer AS BU "
-						    			+ "INNER JOIN "
-						    			+ "bidFor AS BF "
-						    			+ "ON BU.auctionID = BF.auctionID "
-						    			+ "INNER JOIN "
-						    			+ "bid AS B "
-						    			+ "ON BF.bidID = B.bidID "
-						    			+ "WHERE BU.auctionID = `" + auctionID + "` AND B.amount = `" + highestBid + "`");
-						    	rs4.next();
-						    	currentEmail = rs4.getString("email");
-						    	// create the notification
-						    	con.createStatement().executeUpdate("INSERT INTO notification(email, itemID, notification_text)"
-							    		+ "VALUES('" + currentEmail + "', "
-							    		+ "'" + auctionID + "', "
-							    		+ "'Your have won an auction for auctionID: " + auctionID + "'");
-						    }
+
 				    	}
 
 			    	}
 			    }
-			    // if there are no auctions that have ended
 			    else {
-			    	; // do nothing
-			    }
+			      }
 
 
 	    %>
 
-    <table>
-        <tr>
-            <td>ItemID~~~~~</td>
-            <td>Notification text:</td>
-            <td>
-
-
-
-            </td>
-            <td>
-
-
-
-            </td>
-
-        </tr>
-        <%
-        			//parse out the results
-        			while (result.next()) { %>
-        <tr>
-            <td><%= result.getString("itemID")%></td>
-            <td><%= result.getString("notification_text")%></td>
-            <td>
-                <a href="viewAuction.jsp?itemID=<%=result.getString("itemID")%>">View this auction</a>
-            </td>
-
-        </tr>
-
-
-        <% }
-        			%>
-    </table>
-    <br>
-    <table>
-
-
-
-        </tr>
-        <%
-			//parse out the results
-			while (result.next()) { %>
-        <tr>
-            <td><%= result.getString("itemID")%></td>
-            <td><%= result.getString("notification_text")%></td>
-            <td>
-                <a href="viewauction.jsp?itemID=<%=result.getString("itemID")%>">View this auction</a>
-            </td>
-
-        </tr>
-
-
-        <% }
-			//close the connection.
-			db.closeConnection(con);
-			%>
-    </table>
     <%
 	    con.close();
 	} catch (Exception ex) {
@@ -372,4 +281,5 @@ try {
 %>
 
 </body>
+
 </html>

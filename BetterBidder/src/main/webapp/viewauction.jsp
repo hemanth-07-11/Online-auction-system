@@ -8,16 +8,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>View Auction</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
         body {
             font-family: "Roboto", sans-serif;
             background-image: url('download.jpg');
+            background-attachment: fixed;
             height: 710px;
             margin-left: 4%;
         }
-
 
         #tbl {
             font-family: "Roboto", sans-serif;
@@ -86,7 +87,7 @@
         h3 {
             font-family: "Roboto", sans-serif;
             color: white;
-            font-size: 200%;
+            font-size: 3rem;
             font-weight: bold;
             text-align: center;
         }
@@ -122,11 +123,9 @@
     <%
 try {
 
-		//Get the database connection
 		ApplicationDB db = new ApplicationDB();
 		Connection con = db.getConnection();
 
-		//Create a SQL statement
 		Class.forName("com.mysql.jdbc.Driver");
 		Statement stmt = con.createStatement();
 
@@ -191,7 +190,7 @@ try {
             <td>End date</td>
         </tr>
         <%
-			//parse out the results
+
 			while (result.next()) {
 				%>
         <tr id="td1">
@@ -208,10 +207,7 @@ try {
                 <% type = result.getString(v + "_type"); %>
 
             </td>
-
-
             <td>
-
                 <% if(v.equals("mobile"))
 							{
 									out.write(result.getString("megapixels"));
@@ -227,8 +223,6 @@ try {
 									out.write(result.getString("storage"));
 									att1Value = result.getString("storage");
 									}%>
-
-
             </td>
             <td>
 
@@ -271,7 +265,7 @@ try {
 
 
         <% }
-			//close the connection.
+
 
 			%>
     </table>
@@ -309,7 +303,6 @@ try {
             </td>
         </tr>
 
-
         <% }
 
 				    %>
@@ -328,7 +321,6 @@ try {
 		out.print("<br>Oops!! Sorry, there is some problem!");
 	}
 %>
-
 </body>
 
 </html>

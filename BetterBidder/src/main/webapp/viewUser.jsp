@@ -7,7 +7,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Browse!</title>
+    <title>View user</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -42,8 +43,6 @@
             box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
         }
 
-
-
         #hd1 {
             background-color: #172fab;
             font-weight: bold;
@@ -55,7 +54,6 @@
             transform: scale(1.02);
             box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
         }
-
 
         #td1 {
             color: black;
@@ -90,8 +88,6 @@
 
         }
 
-
-
         #backbutton:hover {
             background: #9137d4;
             border: 2px solid #9137d4;
@@ -103,13 +99,11 @@
 <body>
 
     <%
-try {
+        try {
 
-		//Get the database connection
 		ApplicationDB db = new ApplicationDB();
 		Connection con = db.getConnection();
 
-		//Create a SQL statement
 		Class.forName("com.mysql.jdbc.Driver");
 		Statement stmt = con.createStatement();
 		ResultSet result;
@@ -119,6 +113,7 @@ try {
 		System.out.println(query1);
 	    result = stmt.executeQuery(query1);
 	    %>
+
     <h2>Behold, the history of the user <%=email %></h2>
     <h3>Auctions in as seller:</h3>
     <table id="tb">
@@ -152,11 +147,7 @@ try {
                 <a id="tbl" href="viewauction.jsp?itemID=<%=itemID%>">View this auction</a>
             </td>
         </tr>
-
-
         <% }
-
-			//close the connection.
 
 			%>
     </table>
@@ -201,10 +192,7 @@ try {
             </td>
         </tr>
 
-
         <% }
-
-			//close the connection.
 
 			%>
     </table>
@@ -243,15 +231,10 @@ try {
             <td><%= result30.getString("endDate") %></td>
 
         </tr>
-
-
         <% }
 
-           //close the connection.
-
-           %>
+    %>
     </table>
-
     <br><br>
     <a id="backbutton" href="browse.jsp?sortBy=itemID">Back to all auctions</a>
     <%
@@ -262,7 +245,6 @@ try {
 		out.print("<br>Oops!! Sorry, there is some problem!");
 	}
 %>
-
 
 </body>
 

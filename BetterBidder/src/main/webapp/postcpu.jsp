@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Your Cpu Auction</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -14,8 +15,7 @@
             background-image: url('download.jpg');
             background-attachment: fixed;
             height: 710px;
-
-
+            overflow:hidden;
         }
 
         h2 {

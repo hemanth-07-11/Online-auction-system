@@ -7,11 +7,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>Bid Creation</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
         body {
             font-family: "Roboto", sans-serif;
             background-image: url('download.jpg');
+            background-attachment: fixed;
             height: 710px;
             margin-left: 4%;
         }
@@ -52,10 +54,9 @@
 <body>
 
     <%
-try {
+    try {
 	ApplicationDB db = new ApplicationDB();
 	Connection con = db.getConnection();
-
 
 	Class.forName("com.mysql.jdbc.Driver");
 	Statement stmt = con.createStatement();
@@ -66,15 +67,10 @@ try {
 	int amount = Integer.parseInt(string_amount);
 	int int_itemID = Integer.parseInt(itemID);
 
-
-
-	//insert into bid
 	String insert_in_bid = "INSERT INTO bid(amount) VALUES(?)" ;
 	PreparedStatement ps = con.prepareStatement(insert_in_bid);
 	ps.setInt(1, amount);
 	ps.executeUpdate();
-
-
 
 	ResultSet rs = stmt.executeQuery("SELECT max(bidID) as amount FROM bid");
 	rs.next();
@@ -86,9 +82,6 @@ try {
 	String string_auctionID = rs.getString("amount");
 	int auctionID = Integer.parseInt(string_auctionID);
 
-
-
-	//insert into bidFor
 	String insert_in_bidFor = "INSERT INTO bidFor(auctionID, bidID, itemID) VALUES(?,?,?)" ;
 	ps = con.prepareStatement(insert_in_bidFor);
 	ps.setInt(1, auctionID);
@@ -96,18 +89,12 @@ try {
 	ps.setInt(3, int_itemID);
 	ps.executeUpdate();
 
-
-
-	//insert into hasBid
 	String insert_in_hasBid = "INSERT INTO hasBid(email, bidID) VALUES(?,?)" ;
 	ps = con.prepareStatement(insert_in_hasBid);
 	ps.setString(1, string_email);
 	ps.setInt(2, bidID);
 	ps.executeUpdate();
 
-
-
-	//insert into buyer
 	String insert_in_buyer = "INSERT INTO buyer(auctionID, email, itemID) VALUES(?,?,?)" ;
 	ps = con.prepareStatement(insert_in_buyer);
 	ps.setInt(1, auctionID);
@@ -115,8 +102,6 @@ try {
 	ps.setInt(3, int_itemID);
 	ps.executeUpdate();
 
-
-  // show success message
   %>
     <div id="box">
         <h2> Your bid of $<%=string_amount%> was successfully placed on the item with itemID:<%=itemID%> </h2>
@@ -125,14 +110,16 @@ try {
     </div>
 
     <%
-  } catch (Exception ex) {
+  } catch (Exception ex)
+   {
     %>
     <div id="box">
-        <h2> An error has occurred please try again. [<%=ex%>>] </h2>
+        <h2> An error has occurred please try again. You have already bid in this auction !!</h2>
         <br>
         <a id="bt3" href="success.jsp">Return to main page</a>
         <%
     }
   %>
 </body>
+
 </html>

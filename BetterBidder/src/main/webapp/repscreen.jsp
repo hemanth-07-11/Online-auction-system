@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Account Page</title>
+<link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
 *
 {
@@ -16,7 +17,7 @@
     box-sizing: border-box;
 }
         body {
-            background-image: url('download.jpg');
+            background-image: url('bg2.jpg');
             -webkit-font-smoothing: antialiased;
             background-attachment: fixed;
             -moz-osx-font-smoothing: grayscale;
@@ -160,12 +161,13 @@
 
         .q-id{
         float:left;
-        margin-left : 35rem;
+        margin-left : 12rem;
+        text-align:right;
         }
 
         .answer-class {
         	float: right;
-        	margin-right : 35rem;
+        	margin-right : 12rem;
         }
 
           #popUpYes
@@ -192,6 +194,22 @@
             color:white;
             }
 
+        input[type="text"]{
+            width:35%;
+            height:40px;
+            border:2px solid #D3D3D3;;
+            border-radius:0.3rem;
+            font-size:inherit;
+            background:none;
+            color:white;
+            padding:10px;
+            outline:none;
+        }
+        input[type="text"]:{
+            background: #adffff;
+        }
+
+
     </style>
 
 </head>
@@ -211,7 +229,7 @@
         <h2>Welcome to Better bidder Auction</h2>
 
             <form method="post" action="queriespage.jsp">
-                <h3>Browse questions and Add Answers</h3>
+                <h3>Browse questions</h3>
                 <input type="text" name="command">
 				<br> </form>
 	            <h1></h1>

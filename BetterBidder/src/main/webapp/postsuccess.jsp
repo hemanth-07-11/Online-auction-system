@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Auction Created Successfully!</title>
+    <link rel="icon" href="logo.jpeg" type="image/icon type">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -16,13 +17,22 @@
             background-image: url('download.jpg');
             background-attachment: fixed;
             height: 710px;
+        }
 
-
+        #box {
+            width: 40%;
+            background-color: white;
+            height: 200px;
+            border-radius: 20px;
+            text-align: center;
+            padding: 10px;
+            margin-left: 30%;
+            margin-top: 80px;
         }
 
         h2 {
-            color: white;
-            margin-left: 42%;
+            color: black;
+
         }
 
         form {
@@ -41,31 +51,13 @@
             font-weight: bold;
         }
 
-        #bt2 {
-
-            border: 1px solid #081285;
-            font: 17px;
-            padding: 8px 8px 8px 8px;
-            border-radius: 2px;
-            margin-bottom: 0.5rem;
-            width: 270px;
-        }
-
-        #bt1 {
-
-            border: 1px solid #081285;
-            font: 17px;
-            padding: 8px 8px 8px 8px;
-            border-radius: 2px;
-            margin-bottom: 0.5rem;
-        }
-
         #bt3 {
             border: none;
             background: #473bcd;
             color: white;
             padding: 16px;
             font-size: 16px;
+
             cursor: pointer;
             text-decoration: none;
         }
@@ -78,27 +70,24 @@
 </head>
 
 <body style="background-color:bisque;">
+<div id="box">
     <div id="form">
-        <h2> Your Auction has been created !</h2><br>
+        <h2> Your Auction has been created !</h2><br><br><br>
         <a id="bt3" href="success.jsp">Return to menu</a>
+    </div>
     </div>
 
     <%
 
 try {
-
-	//Get the database connection
 	ApplicationDB db = new ApplicationDB();
 	Connection con = db.getConnection();
-
-	//Create a SQL statement
 	Class.forName("com.mysql.jdbc.Driver");
 	Statement stmt = con.createStatement();
 
 	String itemID = request.getParameter("int_maxIID");
 	String v = "";
 
-	//QUERY 1: determine if assembled_cpu mobile or laptop
 	String query1 = ("SELECT * FROM mobile WHERE itemID = " + itemID);
 	System.out.println(query1);
 	ResultSet result1;
@@ -120,7 +109,7 @@ try {
             if(result3.next()==true){v = "assembled_cpu";}
         }
     }
-	//QUERY 2: extract name, type, att1, att2
+
     String att1, att2;
 	if(v.equals("mobile")){att1 = "megapixels"; att2 = "ram";}
 	else if(v.equals("laptop")) {att1 = "storage"; att2 = "ram";}
@@ -136,7 +125,6 @@ try {
 	String type = result4.getString(v + "_type");
 	String name = result4.getString("name");
 
-	//QUERY 3: check if this item's fields match that of any alert
 	ResultSet result5;
 	String query5 = "SELECT * FROM alerts a WHERE (a.name = '' OR a.name = '" + name + "')";
 	query5 += "AND (a.type = '' OR a.type = '" + type + "')";
@@ -144,7 +132,7 @@ try {
 	query5 += "AND (a.att2 = '' OR a.att2 = '" + att2Result + "')";
 	System.out.println(query5);
 	result5 = stmt.executeQuery(query5);
-	//QUERY 4: if they do, get email of the lucky guy
+
 	ArrayList<String> emails = new ArrayList<String>();
 	while(result5.next())
 	{
@@ -158,36 +146,21 @@ try {
 		result6 = stmt2.executeQuery(query6);
 		result6.next();
 		emails.add(result6.getString("email"));
-		//QUERY 5: add to notification table itemID and body with attributes filled in
 
 	}
 	int index = 0;
-	while(index<emails.size()){
-	String query7 = "INSERT INTO notifications VALUES(0, '" + emails.get(index) + "', " + itemID;
-	query7+=", 'An item matching your alert has gone on sale with name: ";
-	query7+= name + ", type: " + type + ", " + att1 + ": " + att1Result + ", " + att2 + ": " + att2Result + "')";
-
-	System.out.println(query7);
-    stmt.executeUpdate(query7);
-    index++;}
-
-
-    %>
+   %>
 
     <br>
-
     <%
     db.closeConnection(con);
     con.close();
-} catch (Exception ex) {
+}
+catch (Exception ex) {
 	out.print(ex);
 	out.print("<br>Oops!! Sorry, there is some problem!");
 }
-
-
 %>
-
-
 </body>
 
 </html>
