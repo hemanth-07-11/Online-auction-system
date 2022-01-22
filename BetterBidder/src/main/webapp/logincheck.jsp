@@ -10,7 +10,47 @@
     <title>Login Check</title>
     <link rel="icon" href="logo.jpeg" type="image/icon type">
 </head>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background-image: url('download.jpg');
+            background-attachment: fixed;
+            height: 710px;
+            margin-left: 4%;
+            overflow:hidden;
+        }
 
+        #box {
+            width: 40%;
+            background-color: white;
+            height: 200px;
+            border-radius: 20px;
+            text-align: center;
+            padding: 10px;
+            margin-left: 30%;
+            margin-top: 80px;
+        }
+
+        h2 {
+            color: black;
+        }
+
+        #bt3 {
+            border: none;
+            background: #473bcd;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        #bt3:hover {
+            background: #9137d4;
+            border: 2px solid #9137d4;
+
+        }
+    </style>
 <body>
     <%
 	try {
@@ -59,10 +99,13 @@
 		else
 		 {
 	    	%>
-    Invalid Password
-    <br>
-    <a href='login.jsp'>try again</a>
-    <input type="submit" value="Try Again" href="login.jsp">
+	    	    <div id="box">
+	    	    <br><br>
+                    <h2> Incorrect credentials </h2>
+                    <br><br>
+                    <a id="bt3" href="login.jsp">Try again</a>
+                </div>
+
     <%
 	    }
 		con.close();

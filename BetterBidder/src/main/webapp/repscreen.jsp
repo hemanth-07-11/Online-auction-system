@@ -17,7 +17,8 @@
     box-sizing: border-box;
 }
         body {
-            background-image: url('bg2.jpg');
+            background-image: url('repscreen.jpg');
+            overflow:hidden;
             -webkit-font-smoothing: antialiased;
             background-attachment: fixed;
             -moz-osx-font-smoothing: grayscale;

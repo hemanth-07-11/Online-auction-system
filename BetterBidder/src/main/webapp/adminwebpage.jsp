@@ -116,7 +116,6 @@
             #hero h2 {
                 font-size: 24px;
                 line-height: 26px;
-                margin-bottom: 30px;
             }
 
             #hero h2 .rotating {
@@ -239,9 +238,10 @@
         <div class="hero-container">
             <div data-aos="fade-in">
                 <br><br><br>
-                <h1>New Customer Representative</h1>
+                <h1> Hi <%=session.getAttribute("user")%>!</h1>
+                <h2>New Customer Representative</h2>
                 <form method="post" action="repcreation.jsp">
-                    <br><br><br><br>
+
                     <h3> Email </h3>
                     <input type="text" name="email">
                     <br><br><br><br>
@@ -267,12 +267,10 @@
                     <label class="radio__label" for="myRadio1">Earnings per item </label>
                     <input class="radio__input" type="radio" name="command" value="type" id="myRadio2"/>
                     <label class="radio__label" for="myRadio2">Earnings per item type </label>
-                    <input class="radio__input" type="radio" name="command" value="user" id="myRadio3"/>
-                    <label class="radio__label" for="myRadio3">Earnings per End-User </label>
-                    <input class="radio__input" type="radio" name="command" value="best selling items" id="myRadio4"/>
-                    <label class="radio__label" for="myRadio4">Best Selling Items </label>
-                    <input class="radio__input" type="radio" name="command" value="best buyer" id="myRadio5"/>
-                    <label class="radio__label" for="myRadio5">Best Buyers </label>
+                    <input class="radio__input" type="radio" name="command" value="best selling items" id="myRadio3"/>
+                    <label class="radio__label" for="myRadio3">Best Selling Items </label>
+                    <input class="radio__input" type="radio" name="command" value="best buyer" id="myRadio4"/>
+                    <label class="radio__label" for="myRadio4">Best Buyers </label>
                      <input type="submit" value="submit" id="popUpYes">
                 </form>
             </div>

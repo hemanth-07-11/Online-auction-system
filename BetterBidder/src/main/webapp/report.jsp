@@ -131,8 +131,8 @@
 				int size =0;
 				if (itemIDs != null)
 				{
-					itemIDs.last();    // moves cursor to the last row
-				  	size = itemIDs.getRow(); // get row id
+					itemIDs.last();
+				  	size = itemIDs.getRow();
 				}
 				itemIDs.beforeFirst();
 
@@ -223,83 +223,6 @@
 				out.print("</td>");
 				out.print("</tr>");
 
-				out.print("</table>");
-			}
-
-     		else if(entity.equals("user")){
-				ResultSet emailBidIDs = con.createStatement().executeQuery("select email,bidID from hasBid where bidID IN(SELECT BF.bidID FROM bid AS B INNER JOIN bidFor AS BF ON B.bidID = BF.bidID INNER JOIN auction AS A ON BF.auctionID = A.auctionID WHERE A.endDate<='2023-01-30')");
-				int size = 0;
-				if (emailBidIDs != null)
-				{
-					emailBidIDs.last();
-				  	size = emailBidIDs.getRow();
-				}
-				emailBidIDs.beforeFirst();
-
-				ArrayList<String> emailsArr = new ArrayList<String>();
-				ArrayList<Integer> amountArr = new ArrayList<Integer>();
-     			for(int i = 0;i<size;i++){
-					emailBidIDs.next();
-					String currentBidID = emailBidIDs.getString("bidID");
-					ResultSet itemID = con.createStatement().executeQuery("select itemID from bidFor where bidID = " + currentBidID + "");
-					itemID.next();
-					String itemIDNum = itemID.getString("itemID");
-					String query2 = "SELECT MAX(AMOUNT) AS amount FROM bid WHERE bidID IN (SELECT bidID FROM bidFor WHERE itemID = " + itemIDNum + ")";
-					ResultSet amounts = con.createStatement().executeQuery(query2);
-					amounts.next();
-					String price = amounts.getString("amount");
-
-					ResultSet temp = con.createStatement().executeQuery("Select bidID FROM bid where amount = " + price + " and bidID IN (SELECT bidID FROM bidFor WHERE itemID = " + itemIDNum + ")");
-					temp.next();
-
-					if(temp.getString("bidID").equals(currentBidID)== false){
-						continue;
-					}
-
-					emailsArr.add((emailBidIDs.getString("email")));
-					amountArr.add(Integer.parseInt(amounts.getString("amount")));
-				}
-
-				ArrayList<String> alreadyDone = new ArrayList<String>();
-				for(int i =0;i<emailsArr.size();i++){
-					if(alreadyDone.indexOf(emailsArr.get(i))==-1){
-						alreadyDone.add(emailsArr.get(i));
-					}
-					else{
-
-						int store = alreadyDone.indexOf(emailsArr.get(i));
-						int temp = amountArr.get(i);
-						amountArr.set(store,temp+amountArr.get(store));
-						amountArr.remove(i);
-						emailsArr.remove(i);
-						i--;
-					}
-				}
-				out.print("<table>");
-
-				out.print("<tr>");
-				out.print("<th>");
-				out.print("Email");
-				out.print("</th>");
-
-				out.print("<th>");
-				out.print("Amount Spent");
-				out.print("</th>");
-				out.print("</tr>");
-
-				int counter = 0;
-				while(counter<emailsArr.size()) {
-
-					out.print("<tr>");
-					out.print("<td>");
-					out.print(emailsArr.get(counter));
-					out.print("</td>");
-					out.print("<td>");
-					out.print(amountArr.get(counter));
-					out.print("</td>");
-					out.print("</tr>");
-					counter++;
-				}
 				out.print("</table>");
 			}
 
@@ -460,7 +383,7 @@
 				out.print("</tr>");
 
 				int counter = 0;
-				while(counter<5||counter<storeEmails.length) {
+				while(counter<3||counter<storeEmails.length) {
 					out.print("<tr>");
 					out.print("<td>");
 					out.print(storeEmails[counter]);

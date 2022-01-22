@@ -17,7 +17,7 @@
         }
 
         body {
-            background-image: url('download.jpg');
+            background-image: url('repscreen.jpg');
             -webkit-font-smoothing: antialiased;
             background-attachment: fixed;
             -moz-osx-font-smoothing: grayscale;
@@ -222,7 +222,7 @@
                 <a href="login.jsp">Please Login</a>
                 <%	} else {
 	%>
-                <h1> Hi <%=session.getAttribute("user")%>!</h1>
+                <h1> Hi!</h1>
                 <h2>Welcome to Better bidder Auction</h2>
 
                 <form method="post" action="queriespage.jsp">
